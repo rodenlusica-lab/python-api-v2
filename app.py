@@ -6,10 +6,7 @@ import os
 
 app = Flask(__name__)
 
-# ✅ ROOT ROUTE (FIX NOT FOUND)
-@app.route("/")
-def home():
-    return "API is running!"
+
 
 def get_db():
     return psycopg2.connect(
