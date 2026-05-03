@@ -9,12 +9,11 @@ app = Flask(__name__)
 # ==========================
 def get_db():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="cloud_system"
+        host="sql312.infinityfree.com",
+        user="if0_41815661",
+        password="lusicafamily1",
+        database="if0_41815661_inventorysystem"
     )
-
 # ==========================
 # PRODUCT CLASS (ONE ONLY)
 # ==========================
