@@ -1,13 +1,16 @@
 from flask import Flask, request, jsonify
 import psycopg2
+from psycopg2.extras import RealDictCursor
 import random
 import os
 
 app = Flask(__name__)
 
-# ==========================
-# DATABASE
-# ==========================
+# ✅ ROOT ROUTE (FIX NOT FOUND)
+@app.route("/")
+def home():
+    return "API is running!"
+
 def get_db():
     return psycopg2.connect(
         host=os.getenv("PGHOST"),
