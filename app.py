@@ -1,19 +1,20 @@
 from flask import Flask, request, jsonify
 import psycopg2
+from psycopg2.extras import RealDictCursor
 import random
+import os
 
 app = Flask(__name__)
 
-# ==========================
-# DATABASE
-# ==========================
+
+
 def get_db():
     return psycopg2.connect(
-        host="PASTE_PGHOST",
-        database="PASTE_PGDATABASE",
-        user="PASTE_PGUSER",
-        password="PASTE_PGPASSWORD",
-        port="PASTE_PGPORT"
+        host=os.getenv("PGHOST"),
+        database=os.getenv("PGDATABASE"),
+        user=os.getenv("PGUSER"),
+        password=os.getenv("PGPASSWORD"),
+        port=os.getenv("PGPORT")
     )
 # ==========================
 # PRODUCT CLASS (ONE ONLY)
@@ -33,7 +34,7 @@ class ProductManager:
 
     def __init__(self):
         self.db = get_db()
-        self.cursor = self.db.cursor()
+        self.cursor = self.db.cursor(cursor_factory=RealDictCursor)
 
     def generate_product_id(self):
         while True:
@@ -123,7 +124,7 @@ class SaleManager:
 
     def __init__(self):
         self.db = get_db()
-        self.cursor = self.db.cursor(dictionary=True)
+        self.cursor = self.db.cursor(cursor_factory=RealDictCursor)
 
     def process_sale(self, sale):
 
@@ -291,3 +292,7 @@ def process_sale():
 # ==========================
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000, debug=True)
+
+@app.route("/", methods=["GET"])
+def home():
+    return "API is running!"
