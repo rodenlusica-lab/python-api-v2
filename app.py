@@ -34,7 +34,7 @@ class ProductManager:
 
     def __init__(self):
         self.db = get_db()
-        self.cursor = self.db.cursor()
+        self.cursor = self.db.cursor(cursor_factory=RealDictCursor)
 
     def generate_product_id(self):
         while True:
@@ -124,7 +124,7 @@ class SaleManager:
 
     def __init__(self):
         self.db = get_db()
-        self.cursor = self.db.cursor(dictionary=True)
+        self.cursor = self.db.cursor(cursor_factory=RealDictCursor)
 
     def process_sale(self, sale):
 
