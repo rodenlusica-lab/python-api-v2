@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import mysql.connector
+import psycopg2
 import random
 
 app = Flask(__name__)
@@ -8,11 +8,12 @@ app = Flask(__name__)
 # DATABASE
 # ==========================
 def get_db():
-    return mysql.connector.connect(
-        host="sql312.infinityfree.com",
-        user="if0_41815661",
-        password="lusicafamily1",
-        database="if0_41815661_inventorysystem"
+    return psycopg2.connect(
+        host="PASTE_PGHOST",
+        database="PASTE_PGDATABASE",
+        user="PASTE_PGUSER",
+        password="PASTE_PGPASSWORD",
+        port="PASTE_PGPORT"
     )
 # ==========================
 # PRODUCT CLASS (ONE ONLY)
@@ -32,7 +33,7 @@ class ProductManager:
 
     def __init__(self):
         self.db = get_db()
-        self.cursor = self.db.cursor(dictionary=True)
+        self.cursor = self.db.cursor()
 
     def generate_product_id(self):
         while True:
