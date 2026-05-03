@@ -10,11 +10,11 @@ app = Flask(__name__)
 # ==========================
 def get_db():
     return psycopg2.connect(
-        host="PASTE_PGHOST",
-        database="PASTE_PGDATABASE",
-        user="PASTE_PGUSER",
-        password="PASTE_PGPASSWORD",
-        port="PASTE_PGPORT"
+        host=os.getenv("PGHOST"),
+        database=os.getenv("PGDATABASE"),
+        user=os.getenv("PGUSER"),
+        password=os.getenv("PGPASSWORD"),
+        port=os.getenv("PGPORT")
     )
 # ==========================
 # PRODUCT CLASS (ONE ONLY)
