@@ -95,7 +95,7 @@ class ProductController:
 
         return ResponseHandler.success({
             "product_id": product_id,
-            "message": f"Generated ID: {product_id} roden lusica"
+            "message": f"Generated ID: {product_id} roden lusicaa"
         })
 
     @staticmethod
